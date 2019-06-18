@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?><review polarity="negative">
+  <sentence>
+    <v gen="m" lem="querer" mood="pastparticiple" name="v" num="p" pos="vmp00pm" postype="main" wd="Queridos"/>
+    <n gen="m" lem="amigo" name="n" num="p" pos="ncmp000" postype="common" wd="amigos"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <v lem="hacer" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="hace"/>
+    <d gen="m" lem="uno" name="d" num="s" pos="di0ms0" postype="indefinite" wd="un"/>
+    <n gen="m" lem="año" name="n" num="s" pos="ncms000" postype="common" wd="año"/>
+    <v lem="tener" mood="indicative" name="v" num="s" person="1" pos="vmis1s0" postype="main" tense="past" wd="tuve"/>
+    <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+    <v lem="cambiar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="cambiar"/>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+    <a gen="f" lem="viejo" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="vieja"/>
+    <n gen="f" lem="lavadora" name="n" num="s" pos="ncfs000" postype="common" wd="lavadora"/>
+    <c lem="porque" name="c" pos="cs" postype="subordinating" wd="porque"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="c" lem="pobre" name="n" num="s" pos="nccs000" postype="common" wd="pobre"/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <v lem="querer" mood="indicative" name="v" num="s" person="3" pos="vmis3s0" postype="main" tense="past" wd="quiso"/>
+    <v lem="jubilar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="jubilar"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence complex="no">
+    <v lem="ser" mood="indicative" name="v" num="s" person="1" pos="vsis1s0" postype="semiauxiliary" tense="past" wd="Fui"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="f" lem="tienda" name="n" num="s" pos="ncfs000" postype="common" wd="tienda"/>
+    <s complex="no" lem="con" name="s" pos="sps00" postype="preposition" wd="con"/>
+    <d gen="f" lem="el" name="d" num="p" pos="da0fp0" postype="article" wd="las"/>
+    <n gen="f" lem="idea" name="n" num="p" pos="ncfp000" postype="common" wd="ideas"/>
+    <r lem="bastante" name="r" pos="rg" wd="bastante"/>
+    <a gen="f" lem="claro" name="a" num="p" pos="aq0fp0" postype="qualificative" wd="claras"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <v lem="necesitar" mood="indicative" name="v" num="s" person="3" pos="vmii3s0" postype="main" tense="imperfect" wd="necesitaba"/>
+    <d gen="f" lem="uno" name="d" num="s" pos="di0fs0" postype="indefinite" wd="una"/>
+    <n gen="f" lem="lavadora" name="n" num="s" pos="ncfs000" postype="common" wd="lavadora"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <a gen="c" lem="gran" name="a" num="s" pos="aq0cs0" postype="qualificative" wd="gran"/>
+    <n gen="f" lem="capacidad" name="n" num="s" pos="ncfs000" postype="common" wd="capacidad"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <s complex="no" lem="con" name="s" pos="sps00" postype="preposition" wd="con"/>
+    <d gen="f" lem="mucho" name="d" num="p" pos="di0fp0" postype="indefinite" wd="muchas"/>
+    <n gen="f" lem="revolución" name="n" num="p" pos="ncfp000" postype="common" wd="revoluciones"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="m" lem="centrifugado" name="n" num="s" pos="ncms000" postype="common" wd="centrifugado"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <neg_structure polarity="neutral" change="yes" value="neg">
+      <c lem="porque" name="c" pos="cs" postype="subordinating" wd="porque"/>
+      <scope>
+        <s complex="no" lem="en" name="s" pos="sps00" postype="preposition" wd="en"/>
+        <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+        <n gen="f" lem="cocina" name="n" num="s" pos="ncfs000" postype="common" wd="cocina"/>
+        <negexp>
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <p gen="c" lem="me" name="p" num="s" person="1" pos="pp1cs000" postype="personal" wd="me"/>
+        <event>
+        <v lem="caber" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="cabe"/>
+      </event>
+        <d gen="f" lem="uno" name="d" num="s" pos="di0fs0" postype="indefinite" wd="una"/>
+        <n gen="f" lem="secadora" name="n" num="s" pos="ncfs000" postype="common" wd="secadora"/>
+      </scope>
+    </neg_structure>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <v lem="necesitar" mood="indicative" name="v" num="s" person="1" pos="vmip1s0" postype="main" tense="present" wd="necesito"/>
+    <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="f" lem="ropa" name="n" num="s" pos="ncfs000" postype="common" wd="ropa"/>
+    <v lem="salir" mood="subjunctive" name="v" num="s" person="1" pos="vmsp1s0" postype="main" tense="present" wd="salga"/>
+    <r lem="ya" name="r" pos="rg" wd="ya"/>
+    <r lem="bastante" name="r" pos="rg" wd="bastante"/>
+    <a gen="f" lem="seco" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="seca"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <r lem="por_otro_lado" name="r" pos="rg" wd="Por_otro_lado"/>
+    <p gen="c" lem="me" name="p" num="s" person="1" pos="pp1cs000" postype="personal" wd="me"/>
+    <v lem="gustar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="gusta"/>
+    <v lem="lavar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="lavar"/>
+    <r lem="siempre" name="r" pos="rg" wd="siempre"/>
+    <s complex="no" lem="con" name="s" pos="sps00" postype="preposition" wd="con"/>
+    <n gen="c" lem="agua" name="n" num="s" pos="nccs000" postype="common" wd="agua"/>
+    <a gen="f" lem="fria" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="fria"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <s complex="no" lem="excepto" name="s" pos="sps00" postype="preposition" wd="excepto"/>
+    <s complex="no" lem="en" name="s" pos="sps00" postype="preposition" wd="en"/>
+    <n gen="m" lem="caso" name="n" num="p" pos="ncmp000" postype="common" wd="casos"/>
+    <r lem="muy" name="r" pos="rg" wd="muy"/>
+    <a gen="c" lem="especial" name="a" num="p" pos="aq0cp0" postype="qualificative" wd="especiales"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <n lem="escogi" name="n" pos="np00000" postype="proper" wd="Escogi"/>
+    <d gen="f" lem="este" name="d" num="s" pos="dd0fs0" postype="demonstrative" wd="esta"/>
+    <n gen="f" lem="lavadora" name="n" num="s" pos="ncfs000" postype="common" wd="lavadora"/>
+    <c lem="porque" name="c" pos="cs" postype="subordinating" wd="porque"/>
+    <v lem="tener" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="tiene"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="selector" name="n" num="s" pos="ncms000" postype="common" wd="selector"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="f" lem="temperatura" name="n" num="s" pos="ncfs000" postype="common" wd="temperatura"/>
+    <a gen="c" lem="independiente" name="a" num="s" pos="aq0cs0" postype="qualificative" wd="independiente"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="programa" name="n" num="s" pos="ncms000" postype="common" wd="programa"/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="usar" mood="subjunctive" name="v" num="s" person="2" pos="vmsp2s0" postype="main" tense="present" wd="uses"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <p gen="c" lem="me" name="p" num="s" person="1" pos="pp1cs000" postype="personal" wd="Me"/>
+    <v lem="parecer" mood="indicative" name="v" num="s" person="3" pos="vmis3s0" postype="main" tense="past" wd="pareció"/>
+    <r lem="bien" name="r" pos="rg" wd="bien"/>
+    <d gen="c" lem="su" name="d" num="s" person="3" pos="dp3cs0" postype="possessive" wd="su"/>
+    <n gen="f" lem="capacidad" name="n" num="s" pos="ncfs000" postype="common" wd="capacidad"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="f" lem="carga" name="n" num="s" pos="ncfs000" postype="common" wd="carga"/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <d gen="c" lem="su" name="d" num="s" person="3" pos="dp3cs0" postype="possessive" wd="su"/>
+    <n gen="f" lem="ventana" name="n" num="s" pos="ncfs000" postype="common" wd="ventana"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <a gen="c" lem="gran" name="a" num="s" pos="aq0cs0" postype="qualificative" wd="gran"/>
+    <n gen="m" lem="tamaño" name="n" num="s" pos="ncms000" postype="common" wd="tamaño"/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="facilitar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="facilita"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <v lem="meter" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="meter"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="f" lem="ropa" name="n" num="s" pos="ncfs000" postype="common" wd="ropa"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence complex="no">
+    <r lem="por_otro_lado" name="r" pos="rg" wd="Por_otro_lado"/>
+    <v lem="tener" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="tiene"/>
+    <z lem="2" name="z" pos="z" wd="dos"/>
+    <n gen="f" lem="opción" name="n" num="p" pos="ncfp000" postype="common" wd="opciones"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="m" lem="centrifugado" name="n" num="s" pos="ncms000" postype="common" wd="centrifugado"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <z lem="500" name="z" pos="z" wd="500"/>
+    <c lem="o" name="c" pos="cc" postype="coordinating" wd="o"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <z lem="900" name="z" pos="z" wd="900"/>
+    <n gen="f" lem="r.p.m." name="n" num="n" pos="ncfn000" postype="common" wd="rpm"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <c lem="cuando" name="c" pos="cs" postype="subordinating" wd="cuando"/>
+    <v lem="centrifugar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="centrifuga"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <z lem="900" name="z" pos="z" wd="900"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="principio" name="n" num="s" pos="ncms000" postype="common" wd="principio"/>
+    <v lem="asustar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="asusta"/>
+    <d gen="m" lem="uno" name="d" num="s" pos="di0ms0" postype="indefinite" wd="un"/>
+    <p gen="m" lem="poco" name="p" num="s" pos="pi0ms000" postype="indefinite" wd="poco"/>
+    <c lem="porque" name="c" pos="cs" postype="subordinating" wd="porque"/>
+    <v lem="sonar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="suena"/>
+    <r lem="igual" name="r" pos="rg" wd="igual"/>
+    <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+    <d gen="m" lem="uno" name="d" num="s" pos="di0ms0" postype="indefinite" wd="un"/>
+    <n gen="m" lem="avión" name="n" num="s" pos="ncms000" postype="common" wd="avión"/>
+    <s complex="no" lem="a_punto_de" name="s" pos="sps00" postype="preposition" wd="a_punto_de"/>
+    <v lem="despegar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="despegar"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <s complex="no" lem="al_cabo_de" name="s" pos="sps00" postype="preposition" wd="al_cabo_de"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="tiempo" name="n" num="s" pos="ncms000" postype="common" wd="tiempo"/>
+    <v lem="acabar" mood="indicative" name="v" num="s" person="2" pos="vmip2s0" postype="main" tense="present" wd="acabas"/>
+    <s complex="no" lem="por" name="s" pos="sps00" postype="preposition" wd="por"/>
+    <v lem="acostumbrar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="acostumbrar"/>
+    <p gen="c" lem="te" name="p" num="s" person="2" pos="pp2cs000" postype="personal" wd="te"/>
+    <f lem="(" name="f" pos="fpa" punct="bracket" punctenclose="open" wd="("/>
+
+    <neg_structure polarity="neutral" change="yes" value="neg">
+      <scope>
+        <negexp>
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <event>
+          <r lem="así" name="r" pos="rg" wd="así"/>
+        </event>
+        <d gen="c" lem="tu" name="d" num="p" person="2" pos="dp2cps" possessornum="s" postype="possessive" wd="tus"/>
+        <n gen="m" lem="vecino" name="n" num="p" pos="ncmp000" postype="common" wd="vecinos"/>
+      </scope>
+      
+      
+      
+    </neg_structure>
+    
+    <f lem=")" name="f" pos="fpt" punct="bracket" punctenclose="close" wd=")"/>
+    </sentence>
+    <sentence>
+    <n lem="pero" name="n" pos="np00000" postype="proper" wd="Pero"/>
+    <s complex="no" lem="para" name="s" pos="sps00" postype="preposition" wd="para"/>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+    <n gen="m" lem="aqui" name="n" num="s" pos="ncms000" postype="common" wd="aqui"/>
+    <v lem="empezar" mood="indicative" name="v" num="p" person="3" pos="vmis3p0" postype="main" tense="past" wd="empezaron"/>
+    <d gen="m" lem="el" name="d" num="p" pos="da0mp0" postype="article" wd="los"/>
+    <n gen="m" lem="problema" name="n" num="p" pos="ncmp000" postype="common" wd="problemas"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <v lem="descontar" mood="gerund" name="v" pos="vmg0000" postype="main" wd="Descontando"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="lavado" name="n" num="s" pos="ncms000" postype="common" wd="lavado"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="f" lem="ropa" name="n" num="s" pos="ncfs000" postype="common" wd="ropa"/>
+    <a gen="f" lem="delicado" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="delicada"/>
+    <f lem="(" name="f" pos="fpa" punct="bracket" punctenclose="open" wd="("/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="excluir" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="excluye"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="centrifugado" name="n" num="s" pos="ncms000" postype="common" wd="centrifugado"/>
+    <f lem=")" name="f" pos="fpt" punct="bracket" punctenclose="close" wd=")"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <s complex="no" lem="en" name="s" pos="sps00" postype="preposition" wd="en"/>
+    <n gen="f" lem="realidad" name="n" num="s" pos="ncfs000" postype="common" wd="realidad"/>
+    <a gen="m" lem="solo" name="a" num="s" pos="aq0ms0" postype="qualificative" wd="solo"/>
+    <v lem="tener" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="tiene"/>
+    <d gen="m" lem="otro" name="d" num="p" pos="di0mp0" postype="indefinite" wd="otros"/>
+    <z lem="2" name="z" pos="z" wd="dos"/>
+    <n gen="m" lem="programa" name="n" num="p" pos="ncmp000" postype="common" wd="programas"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <p gen="m" lem="uno" name="p" num="s" pos="pi0ms000" postype="indefinite" wd="Uno"/>
+    <s complex="no" lem="para" name="s" pos="sps00" postype="preposition" wd="para"/>
+    <n gen="f" lem="ropa" name="n" num="s" pos="ncfs000" postype="common" wd="ropa"/>
+    <r lem="muy" name="r" pos="rg" wd="muy"/>
+    <a gen="f" lem="sucio" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="sucia"/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="tardar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="tarda"/>
+    <r lem="prácticamente" name="r" pos="rg" wd="prácticamente"/>
+    <z lem="2" name="z" pos="z" wd="DOS"/>
+    <n lem="horas" name="n" pos="np00000" postype="proper" wd="HORAS"/>
+    <s complex="no" lem="en" name="s" pos="sps00" postype="preposition" wd="en"/>
+    <v lem="completar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="completar"/>
+    <p gen="c" lem="se" name="p" num="n" person="3" pos="pp3cn000" postype="personal" wd="se"/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="centrifugar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="centrifuga"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <z lem="900" name="z" pos="z" wd="900"/>
+    <n gen="f" lem="r.p.m." name="n" num="n" pos="ncfn000" postype="common" wd="rpm"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="Y"/>
+    <d gen="m" lem="otro" name="d" num="s" pos="di0ms0" postype="indefinite" wd="otro"/>
+    <n gen="m" lem="lavado" name="n" num="s" pos="ncms000" postype="common" wd="lavado"/>
+    <r lem="más" name="r" pos="rg" wd="más"/>
+    <a gen="m" lem="rápido" name="a" num="s" pos="aq0ms0" postype="qualificative" wd="rápido"/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <r lem="menos" name="r" pos="rg" wd="menos"/>
+    <a gen="c" lem="eficaz" name="a" num="s" pos="aq0cs0" postype="qualificative" wd="eficaz"/>
+    <r lem="por_lo_tanto" name="r" pos="rg" wd="por_lo_tanto"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="tardar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="tarda"/>
+    <r lem="apenas" name="r" pos="rg" wd="apenas"/>
+    <a gen="f" lem="medio" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="media"/>
+    <n gen="f" lem="hora" name="n" num="s" pos="ncfs000" postype="common" wd="hora"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <c lem="pero" name="c" pos="cc" postype="coordinating" wd="pero"/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="centrifugar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="centrifuga"/>
+    <r lem="solamente" name="r" pos="rg" wd="solamente"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <z lem="500" name="z" pos="z" wd="500"/>
+    <n gen="f" lem="r.p.m." name="n" num="n" pos="ncfn000" postype="common" wd="rpm"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <p gen="c" lem="te" name="p" num="s" person="2" pos="pp2cs000" postype="personal" wd="te"/>
+    <v lem="dejar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="deja"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="f" lem="ropa" name="n" num="s" pos="ncfs000" postype="common" wd="ropa"/>
+    <v lem="chorrear" mood="gerund" name="v" pos="vmg0000" postype="main" wd="chorreando"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence complex="yes">
+    <c lem="que" name="c" pos="cs" postype="subordinating" wd="Que"/>
+    <a gen="f" lem="poquito" name="a" num="p" pos="aq0fp0" postype="qualificative" wd="poquitas"/>
+    <n gen="f" lem="prestación" name="n" num="p" pos="ncfp000" postype="common" wd="prestaciones"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+
+    <neg_structure polarity="positive" change="yes" value="neg">
+      <scope>
+        <negexp>
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <event>
+          <v lem="ser" mood="indicative" name="v" num="s" person="3" pos="vsis3s0" postype="semiauxiliary" tense="past" wd="fue"/>
+          <d gen="f" lem="uno" name="d" num="s" pos="di0fs0" postype="indefinite" wd="una"/>
+          <a gen="f" lem="lavador" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="lavadora"/>
+          <n gen="f" lem="cara" name="n" num="s" pos="ncfs000" postype="common" wd="cara"/>
+        </event>
+      </scope>
+      
+      
+      
+    </neg_structure>
+    
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <c lem="pero" name="c" pos="cc" postype="coordinating" wd="pero"/>
+
+    <neg_structure polarity="negative" polarity_modifier="reduction" value="neg">
+      <scope>
+        <negexp>
+        <r lem="tampoco" name="r" pos="rg" wd="tampoco"/>
+      </negexp>
+        <event>
+        <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+          <r lem="más" name="r" pos="rg" wd="más"/>
+        <a gen="f" lem="barato" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="barata"/>
+      </event>
+      </scope>
+      
+      
+    </neg_structure>
+    
+    
+    
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <n lem="en" name="n" pos="np00000" postype="proper" wd="En"/>
+    <d gen="c" lem="su" name="d" num="s" person="3" pos="dp3cs0" postype="possessive" wd="su"/>
+    <n gen="m" lem="año" name="n" num="s" pos="ncms000" postype="common" wd="año"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="f" lem="vida" name="n" num="s" pos="ncfs000" postype="common" wd="vida"/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <v lem="haber" mood="indicative" name="v" num="s" person="3" pos="vaip3s0" postype="auxiliary" tense="present" wd="ha"/>
+    <v gen="m" lem="estropear" mood="pastparticiple" name="v" num="s" pos="vmp00sm" postype="main" wd="estropeado"/>
+    <z lem="3" name="z" pos="z" wd="3"/>
+    <n gen="f" lem="vez" name="n" num="p" pos="ncfp000" postype="common" wd="veces"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <d gen="f" lem="el" name="d" num="p" pos="da0fp0" postype="article" wd="las"/>
+    <z lem="2" name="z" pos="z" wd="dos"/>
+    <a gen="f" lem="1" name="a" num="p" pos="ao0fp0" postype="ordinal" wd="primeras"/>
+    <p case="accusative" gen="f" lem="lo" name="p" num="p" person="3" pos="pp3fpa00" postype="personal" wd="las"/>
+    <v lem="cubrir" mood="indicative" name="v" num="s" person="3" pos="vmis3s0" postype="main" tense="past" wd="cubrió"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="f" lem="garantía" name="n" num="s" pos="ncfs000" postype="common" wd="garantía"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <a gen="f" lem="2" name="a" num="s" pos="ao0fs0" postype="ordinal" wd="segunda"/>
+    <n gen="f" lem="avería" name="n" num="s" pos="ncfs000" postype="common" wd="avería"/>
+    <p case="accusative" gen="f" lem="lo" name="p" num="s" person="3" pos="pp3fsa00" postype="personal" wd="la"/>
+    <v lem="pagar" mood="subjunctive" name="v" num="s" person="3" pos="vmsp3s0" postype="main" tense="present" wd="pague"/>
+    <p case="nominative" gen="c" lem="yo" name="p" num="s" person="1" pos="pp1csn00" postype="personal" wd="yo"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="Se"/>
+    <v lem="romper" mood="indicative" name="v" num="s" person="3" pos="vmis3s0" postype="main" tense="past" wd="rompió"/>
+    <d gen="f" lem="uno" name="d" num="s" pos="di0fs0" postype="indefinite" wd="una"/>
+    <n gen="f" lem="barra" name="n" num="s" pos="ncfs000" postype="common" wd="barra"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="m" lem="plástico" name="n" num="s" pos="ncms000" postype="common" wd="plástico"/>
+    <p gen="c" lem="que" name="p" num="n" pos="pr0cn000" postype="relative" wd="que"/>
+    <v lem="llevar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="lleva"/>
+    <s complex="no" lem="dentro_de" name="s" pos="sps00" postype="preposition" wd="dentro_de"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="tambor" name="n" num="s" pos="ncms000" postype="common" wd="tambor"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <n gen="m" lem="acero" name="n" num="s" pos="ncms000" postype="common" wd="acero"/>
+    <a gen="c" lem="inox" name="a" num="n" pos="aq0cn0" postype="qualificative" wd="inox"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="La"/>
+    <a gen="f" lem="2" name="a" num="s" pos="ao0fs0" postype="ordinal" wd="segunda"/>
+    <n gen="f" lem="vez" name="n" num="s" pos="ncfs000" postype="common" wd="vez"/>
+    <v lem="ser" mood="indicative" name="v" num="s" person="3" pos="vsis3s0" postype="semiauxiliary" tense="past" wd="fue"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="mando" name="n" num="s" pos="ncms000" postype="common" wd="mando"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <d gen="m" lem="el" name="d" num="p" pos="da0mp0" postype="article" wd="los"/>
+    <n gen="m" lem="programa" name="n" num="p" pos="ncmp000" postype="common" wd="programas"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+    <n gen="m" lem="dejo" name="n" num="s" pos="ncms000" postype="common" wd="dejo"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <v lem="actuar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="actuar"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence complex="no">
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="La"/>
+    <a gen="f" lem="3" name="a" num="s" pos="ao0fs0" postype="ordinal" wd="tercera"/>
+    <v lem="ser" mood="indicative" name="v" num="s" person="3" pos="vsis3s0" postype="semiauxiliary" tense="past" wd="fue"/>
+    <r lem="más" name="r" pos="rg" wd="más"/>
+    <a gen="f" lem="gordo" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="gorda"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <v lem="inundar" mood="indicative" name="v" num="s" person="1" pos="vmip1s0" postype="main" tense="present" wd="inundo"/>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+    <n gen="f" lem="casa" name="n" num="s" pos="ncfs000" postype="common" wd="casa"/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <n gen="f" lem="parte" name="n" num="s" pos="ncfs000" postype="common" wd="parte"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+    <n gen="f" lem="vecino" name="n" num="s" pos="ncfs000" postype="common" wd="vecina"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="m" lem="deje" name="n" num="s" pos="ncms000" postype="common" wd="deje"/>
+    <s complex="no" lem="en" name="s" pos="sps00" postype="preposition" wd="en"/>
+    <n gen="f" lem="marcha" name="n" num="s" pos="ncfs000" postype="common" wd="marcha"/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <p gen="c" lem="me" name="p" num="s" person="1" pos="pp1cs000" postype="personal" wd="me"/>
+    <v lem="ir" mood="indicative" name="v" num="s" person="1" pos="vmis1s0" postype="main" tense="past" wd="fui"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <v lem="trabajar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="trabajar"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+    <n gen="f" lem="vuelta" name="n" num="s" pos="ncfs000" postype="common" wd="vuelta"/>
+    <v lem="comprobar" mood="indicative" name="v" num="s" person="1" pos="vmis1s0" postype="main" tense="past" wd="comprobé"/>
+    <neg_structure polarity="negative" change="yes" value="neg">
+      <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+      <scope>
+        <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+        <n gen="f" lem="lavadora" name="n" num="s" pos="ncfs000" postype="common" wd="lavadora"/>
+        
+        <negexp>
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <event>
+        <v lem="haber" mood="indicative" name="n" num="s" person="3" pos="vaii3s0" postype="auxiliary" tense="imperfect" wd="habia"/>
+        <v gen="m" lem="dejar" mood="pastparticiple" name="v" num="s" pos="vmp00sm" postype="main" wd="dejado"/>
+        <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+        <v lem="coger" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="coger"/>
+      </event>
+        <n gen="c" lem="agua" name="n" num="s" pos="nccs000" postype="common" wd="agua"/>
+        <s complex="no" lem="en" name="s" pos="sps00" postype="preposition" wd="en"/>
+        <d gen="f" lem="todo" name="d" num="s" pos="di0fs0" postype="indefinite" wd="toda"/>
+        <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+        <n gen="f" lem="mañana" name="n" num="s" pos="ncfs000" postype="common" wd="mañana"/>
+      </scope>
+    </neg_structure>
+
+    
+    
+    
+    
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <v lem="desbordar" mood="indicative" name="v" num="s" person="3" pos="vmii3s0" postype="main" tense="imperfect" wd="desbordaba"/>
+    <s complex="no" lem="por" name="s" pos="sps00" postype="preposition" wd="por"/>
+    <d gen="f" lem="todo" name="d" num="p" pos="di0fp0" postype="indefinite" wd="todas"/>
+    <n gen="f" lem="parte" name="n" num="p" pos="ncfp000" postype="common" wd="partes"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence complex="yes">
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="Y"/>
+
+    
+    <neg_structure polarity="neutral" change="yes" value="neg">
+      <scope>
+        
+        <negexp>
+        <r lem="aun" name="r" pos="rg" wd="aun"/>
+          <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <event>
+        <v lem="haber" mood="indicative" name="v" num="s" person="3" pos="vaip3s0" postype="auxiliary" tense="present" wd="ha"/>
+        <v gen="m" lem="terminar" mood="pastparticiple" name="v" num="s" pos="vmp00sm" postype="main" wd="terminado"/>
+      </event>
+        <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+        <n gen="f" lem="odisea" name="n" num="s" pos="ncfs000" postype="common" wd="odisea"/>
+      </scope>
+      
+      
+      
+    </neg_structure>
+    
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <v lem="parecer" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="parece"/>
+    <v lem="ser" mood="infinitive" name="v" pos="vsn0000" postype="semiauxiliary" wd="ser"/>
+    <neg_structure polarity="negative" change="yes" value="neg">
+      <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+      <scope>
+        <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+        <n gen="f" lem="lavadora" name="n" num="s" pos="ncfs000" postype="common" wd="lavadora"/>
+        <negexp>
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <event>
+        <v lem="estar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="está"/>
+          <v gen="f" lem="preparar" mood="pastparticiple" name="v" num="s" pos="vmp00sf" postype="main" wd="preparada"/>
+        <s complex="no" lem="para" name="s" pos="sps00" postype="preposition" wd="para"/>
+        <n gen="m" lem="centriffugar" name="n" num="s" pos="ncms000" postype="common" wd="centriffugar"/>
+      </event>
+        <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+        <d gen="f" lem="ese" name="d" num="s" pos="dd0fs0" postype="demonstrative" wd="esa"/>
+        <n gen="f" lem="velocidad" name="n" num="s" pos="ncfs000" postype="common" wd="velocidad"/>
+      </scope>
+    </neg_structure>
+
+    
+    
+    
+    
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <v lem="haber" mood="indicative" name="v" num="s" person="3" pos="vaip3s0" postype="auxiliary" tense="present" wd="ha"/>
+    <v gen="m" lem="romper" mood="pastparticiple" name="v" num="s" pos="vmp00sm" postype="main" wd="roto"/>
+    <d gen="m" lem="uno" name="d" num="s" pos="di0ms0" postype="indefinite" wd="un"/>
+    <n gen="m" lem="cojinete" name="n" num="s" pos="ncms000" postype="common" wd="cojinete"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <v lem="hacer" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="hace"/>
+    <d gen="m" lem="uno" name="d" num="s" pos="di0ms0" postype="indefinite" wd="un"/>
+    <n gen="m" lem="ruido" name="n" num="s" pos="ncms000" postype="common" wd="ruido"/>
+    <a gen="c" lem="terrible" name="a" num="s" pos="aq0cs0" postype="qualificative" wd="terrible"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <d gen="m" lem="mucho" name="d" num="s" pos="di0ms0" postype="indefinite" wd="mucho"/>
+    <n gen="m" lem="mas" name="n" num="s" pos="ncms000" postype="common" wd="mas"/>
+    <a gen="m" lem="tremendo" name="a" num="s" pos="aq0ms0" postype="qualificative" wd="tremendo"/>
+    <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <p gen="m" lem="suyo" name="p" num="s" person="3" pos="px3ms0c0" possessornum="c" postype="possessive" wd="suyo"/>
+    <a gen="c" lem="habitual" name="a" num="s" pos="aq0cs0" postype="qualificative" wd="habitual"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <c lem="a_medida_que" name="c" pos="cs" postype="subordinating" wd="a_medida_que"/>
+    <v lem="centrifugar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="centrifuga"/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <v lem="ir" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="va"/>
+    <v lem="salir" mood="gerund" name="v" pos="vmg0000" postype="main" wd="saliendo"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <n gen="m" lem="lugar" name="n" num="s" pos="ncms000" postype="common" wd="lugar"/>
+    <p lem="donde" name="p" pos="pr000000" postype="relative" wd="donde"/>
+    <v lem="estar" mood="indicative" name="v" num="s" person="3" pos="vaip3s0" postype="auxiliary" tense="present" wd="está"/>
+    <v gen="f" lem="empotrar" mood="pastparticiple" name="v" num="s" pos="vmp00sf" postype="main" wd="empotrada"/>
+    <c lem="y" name="c" pos="cc" postype="coordinating" wd="y"/>
+    <v lem="acabar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="acaba"/>
+    <s complex="no" lem="en_medio_de" name="s" pos="sps00" postype="preposition" wd="en_medio_de"/>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="la"/>
+    <n gen="f" lem="cocina" name="n" num="s" pos="ncfs000" postype="common" wd="cocina"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="Mi"/>
+    <n gen="f" lem="familia" name="n" num="s" pos="ncfs000" postype="common" wd="familia"/>
+    <r lem="ya" name="r" pos="rg" wd="ya"/>
+    <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+    <p case="accusative" gen="c" lem="lo" name="p" num="n" person="3" pos="pp3cna00" postype="personal" wd="lo"/>
+    <v lem="tomar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="toma"/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <n gen="f" lem="risa" name="n" num="s" pos="ncfs000" postype="common" wd="risa"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+    <d gen="c" lem="mi" name="d" num="s" person="1" pos="dp1css" possessornum="s" postype="possessive" wd="mi"/>
+    <p gen="c" lem="me" name="p" num="s" person="1" pos="pp1cs000" postype="personal" wd="me"/>
+    <v lem="dar" mood="indicative" name="v" num="p" person="3" pos="vmip3p0" postype="main" tense="present" wd="dan"/>
+    <n gen="f" lem="gana" name="n" num="p" pos="ncfp000" postype="common" wd="ganas"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <v lem="llorar" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="llorar"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence>
+    <d gen="f" lem="el" name="d" num="s" pos="da0fs0" postype="article" wd="La"/>
+    <n gen="f" lem="reparación" name="n" num="s" pos="ncfs000" postype="common" wd="reparación"/>
+    <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+    <d gen="m" lem="el" name="d" num="s" pos="da0ms0" postype="article" wd="el"/>
+    <a gen="m" lem="susodicho" name="a" num="s" pos="aq0ms0" postype="qualificative" wd="susodicho"/>
+    <n gen="m" lem="cojinete" name="n" num="s" pos="ncms000" postype="common" wd="cojinete"/>
+    <v lem="salir" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="sale"/>
+    <a gen="f" lem="carisima" name="a" num="s" pos="aqsfs0" postype="qualificative" wd="carisima"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+
+  <sentence complex="no">
+    <r lem="por_lo_tanto" name="r" pos="rg" wd="Por_lo_tanto"/>
+    <neg_structure polarity="neutral" change="no" value="contrast">
+      <scope>
+      <negexp discid="1n">
+          <negexp>
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        </negexp>
+      <event>
+        <v lem="ver" mood="indicative" name="v" num="s" person="1" pos="vmip1s0" postype="main" tense="present" wd="veo"/>
+      </event>
+      <negexp discid="1c">
+          <d gen="f" lem="otro" name="d" num="s" pos="di0fs0" postype="indefinite" wd="otra"/>
+        </negexp>
+      <n gen="f" lem="salida" name="n" num="s" pos="ncfs000" postype="common" wd="salida"/>
+    </scope>
+      <negexp discid="1c">
+        <c lem="que" name="c" pos="cs" postype="subordinating" wd="que"/>
+      </negexp>
+      <v lem="pedir" mood="infinitive" name="v" pos="vmn0000" postype="main" wd="pedir"/>
+      <p case="dative" gen="c" lem="le" name="p" num="s" person="3" pos="pp3csd00" postype="personal" wd="le"/>
+      <d gen="f" lem="uno" name="d" num="s" pos="di0fs0" postype="indefinite" wd="una"/>
+      <n gen="f" lem="lavadora" name="n" num="s" pos="ncfs000" postype="common" wd="lavadora"/>
+      <a gen="f" lem="nuevo" name="a" num="s" pos="aq0fs0" postype="qualificative" wd="nueva"/>
+      <s complex="no" lem="a" name="s" pos="sps00" postype="preposition" wd="a"/>
+      <d gen="m" lem="el" name="d" num="p" pos="da0mp0" postype="article" wd="los"/>
+      <n lem="reyes_magos" name="n" pos="np00000" postype="proper" wd="Reyes_Magos"/>
+      <d gen="m" lem="este" name="d" num="s" pos="dd0ms0" postype="demonstrative" wd="este"/>
+      <n gen="m" lem="año" name="n" num="s" pos="ncms000" postype="common" wd="año"/>
+    </neg_structure>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+    <c lem="si" name="c" pos="cs" postype="subordinating" wd="si"/>
+    <v lem="aguantar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="aguanta"/>
+    <s complex="no" lem="hasta" name="s" pos="sps00" postype="preposition" wd="hasta"/>
+    <r lem="entonces" name="r" pos="rg" wd="entonces"/>
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+  <sentence complex="no">
+    <n lem="pd" name="n" pos="np00000" postype="proper" wd="PD"/>
+    <f lem=":" name="f" pos="fd" punct="colon" wd=":"/>
+    <p gen="m" lem="todo" name="p" num="s" pos="pi0ms000" postype="indefinite" wd="Todo"/>
+    <p case="accusative" gen="c" lem="lo" name="p" num="n" person="3" pos="pp3cna00" postype="personal" wd="lo"/>
+    <v lem="aqui" mood="indicative" name="v" num="s" person="1" pos="vmis1s0" postype="main" tense="past" wd="aqui"/>
+    <v gen="m" lem="referir" mood="pastparticiple" name="v" num="s" pos="vmp00sm" postype="main" wd="referido"/>
+    <v lem="ser" mood="indicative" name="v" num="s" person="3" pos="vsip3s0" postype="semiauxiliary" tense="present" wd="es"/>
+    <a gen="m" lem="verídico" name="a" num="s" pos="aq0ms0" postype="qualificative" wd="verídico"/>
+    <f lem="," name="f" pos="fc" punct="comma" wd=","/>
+
+    <neg_structure polarity="negative" polarity_modifier="increment" value="neg">
+      <scope>
+        <negexp discid="1n">
+        <r lem="no" name="r" pos="rn" postype="negative" wd="no"/>
+      </negexp>
+        <event>
+          <p gen="c" lem="se" name="p" num="n" pos="p00cn000" wd="se"/>
+          <v lem="tratar" mood="indicative" name="v" num="s" person="3" pos="vmip3s0" postype="main" tense="present" wd="trata"/>
+          <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+          
+            <negexp discid="1c">
+              <d gen="f" lem="ninguno" name="d" num="s" pos="di0fs0" postype="indefinite" wd="ninguna"/>
+            </negexp>
+            
+              <n gen="f" lem="película" name="a" num="s" pos="ncfs000" postype="common" wd="peli"/>
+              <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+              <n gen="m" lem="terror" name="n" num="s" pos="ncms000" postype="common" wd="terror"/>
+              <negexp discid="1c">
+        <c lem="ni" name="c" pos="cc" postype="coordinating" wd="ni"/>
+      </negexp>
+              <s complex="no" lem="de" name="s" pos="sps00" postype="preposition" wd="de"/>
+              <n gen="f" lem="risa" name="n" num="s" pos="ncfs000" postype="common" wd="risa"/>
+      
+        </event>
+        
+        
+        
+        
+        
+        
+        
+        
+      </scope>
+      
+      
+      
+      
+    </neg_structure>
+   
+    
+    
+    
+    <f lem="." name="f" pos="fp" punct="period" wd="."/>
+  </sentence>
+
+</review>
