@@ -8,7 +8,7 @@ from torch.utils.data.dataloader import default_collate
 import torchtext
 from torchtext.datasets import SST
 
-from read_data import *
+from Utils.read_data import *
 
 
 class Split(object):
@@ -33,26 +33,28 @@ class Split(object):
         return words, targets
 
 class SFUDataset(object):
-    def __init__(self, vocab, lower_case, data_dir="../../data/subtaskB_training_and_dev_sets/SFU"):
+    def __init__(self, vocab, lower_case, data_dir="../../data"):
 
         self.vocab =  vocab
-        self.pol_dict = {"negative": 0, "positive": 1}
+        self.labels = {"negative": 0, "positive": 1}
         self.scope_dict = {"B": 0, "I": 1, "O": 2}
 
         self.splits = {}
+        self.splits_names = {}
 
         for split in ["train", "dev"]:
-            self.splits[split] = self.open_split(data_dir, split, lower_case)
+            self.splits_names[split], self.splits[split] = self.open_split(data_dir, split, lower_case)
 
+        self.splits_names["test"], self.splits["test"] = self.open_split(data_dir, "test", lower_case, train=False)
 
-    def open_split(self, data_dir, split, lower_case):
+    def open_split(self, data_dir, split, lower_case, train=True):
         text = torchtext.data.Field(lower=lower_case, include_lengths=True, batch_first=True)
         polarity_label = torchtext.data.Field(sequential=False)
         scope_label = torchtext.data.Field(sequential=True)
         relev_label = torchtext.data.Field(sequential=False)
 
         datafile = os.path.join(data_dir, split)
-        dataset, polarities = get_dataset(datafile)
+        filenames, dataset, polarities = get_dataset(datafile, train=train)
         scopes = [[scope_bio(s) for s in review] for review in dataset]
         relev = [[relevant_negation_tags(s) for s in review] for review in dataset]
         sents = [[clean_sent(s) for s in review] for review in dataset]
@@ -65,7 +67,7 @@ class SFUDataset(object):
         #data_split = [(torch.LongTensor(self.vocab.ws2ids(item.text)),
         #               torch.LongTensor([self.polarity_label[item.polarity]])) for item in data]
 
-        return data
+        return filenames, data
 
     def get_split(self, name):
         return Split(self.splits[name])

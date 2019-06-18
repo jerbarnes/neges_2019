@@ -3,14 +3,16 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence, PackedSequence
 from torch.utils.data import DataLoader
+from collections import Counter
 
 from itertools import chain
 from sklearn.metrics import classification_report, confusion_matrix, f1_score, accuracy_score
 from sklearn.preprocessing import LabelBinarizer
+from sklearn.svm import LinearSVC
 
-from Utils.sst import *
+from Utils.datasets import *
 from Utils.WordVecs import *
-from hard_parameter_bilstm_crf import *
+from hierarchical_training import *
 
 import argparse
 
@@ -43,9 +45,8 @@ class Hierarchical_Model(nn.Module):
 
     def __init__(self, word2idx,
                  embedding_matrix,
-                 tag_to_ix,
+                 tag_2_idx,
                  sentiment_label_size,
-                 task2label2id,
                  embedding_dim,
                  hidden_dim,
                  num_layers=2,
@@ -55,12 +56,13 @@ class Hierarchical_Model(nn.Module):
                  START_TAG="<START>",
                  STOP_TAG="<STOP>"):
         super(Hierarchical_Model, self).__init__()
+        self.vocab = word2idx
         self.embedding_dim = embedding_dim
         self.hidden_dim = hidden_dim
         self.vocab_size = len(word2idx)
-        self.tag_to_ix = tag_to_ix
-        self.tagset_size = len(tag_to_ix)
-        self.task2label2id = task2label2id
+
+        self.tag_2_idx = tag_2_idx
+        self.tagset_size = len(tag_2_idx)
         self.lstm_dropout = lstm_dropout
         self.word_dropout = word_dropout
         self.sentiment_criterion = nn.CrossEntropyLoss()
@@ -71,13 +73,14 @@ class Hierarchical_Model(nn.Module):
         weight = torch.FloatTensor(embedding_matrix)
         self.word_embeds = nn.Embedding.from_pretrained(weight, freeze=False)
         self.word_embeds.requires_grad = train_embeddings
+        #self.word_embeds = nn.Embedding(len(vocab), embedding_dim)
 
         self.lstm1 = nn.LSTM(embedding_dim,
                             hidden_dim,
                             num_layers=1,
                             bidirectional=True)
 
-        self.lstm2 = nn.LSTM(embedding_dim + (hidden_dim * 2),
+        self.lstm2 = nn.LSTM(hidden_dim*2,
                             hidden_dim,
                             num_layers=1,
                             bidirectional=True)
@@ -92,8 +95,8 @@ class Hierarchical_Model(nn.Module):
 
         # These two statements enforce the constraint that we never transfer
         # to the start tag and we never transfer from the stop tag
-        self.transitions.data[tag_to_ix[self.START_TAG], :] = -10000
-        self.transitions.data[:, tag_to_ix[self.STOP_TAG]] = -10000
+        self.transitions.data[tag_2_idx[self.START_TAG], :] = -10000
+        self.transitions.data[:, tag_2_idx[self.STOP_TAG]] = -10000
 
         # Set up layers for sentiment prediction
         self.word_dropout = nn.Dropout(word_dropout)
@@ -101,60 +104,46 @@ class Hierarchical_Model(nn.Module):
         self.linear = nn.Linear(hidden_dim*2, sentiment_label_size)
 
 
-    def init_hidden1(self, batch_size=1):
-        h0 = torch.zeros((self.lstm1.num_layers*(1+self.lstm1.bidirectional),
-                                  batch_size, self.lstm1.hidden_size))
-        c0 = torch.zeros_like(h0)
-        return (h0, c0)
 
-    def init_hidden2(self, batch_size=1):
-        h0 = torch.zeros((self.lstm2.num_layers*(1+self.lstm2.bidirectional),
-                                  batch_size, self.lstm2.hidden_size))
-        c0 = torch.zeros_like(h0)
-        return (h0, c0)
-
-    def max_pool(self, x):
-        batch_size = x.batch_sizes[0]
-
-        emb = self.word_embeds(x.data)
-        emb = self.batch_norm(emb)
+    def max_pool(self, sentence):
+        x = torch.tensor(sentence)
+        emb = self.word_embeds(x).unsqueeze(1)
         emb = self.word_dropout(emb)
 
-        packed_emb = PackedSequence(emb, x.batch_sizes)
-        self.hidden = self.init_hidden1(batch_size)
+        int_output, (hn, cn) = self.lstm1(emb)
+        pooled, _ = int_output.max(dim=0)
+        return pooled
 
-        int_output, (hn, cn) = self.lstm1(packed_emb, self.hidden)
+    def get_document_rep(self, doc):
+        sentence_reps = []
+        for sent in doc:
+            sentence_reps.append(self.max_pool(sent))
 
-        # For sentiment, concatenate the intermediate rep with the embeddings
-        # WE MIGHT NEED TO CHANGE THIS TO KEEP THE HIDDEN REPRESENTATIONS
-        # INSTEAD OF THE OUTPUTS
-        int_input = torch.cat((emb, int_output.data), dim=1)
-        int_input = PackedSequence(int_input, x.batch_sizes)
-
-        output, _ = self.lstm2(int_input)
-        o, _ = pad_packed_sequence(output, batch_first=True)
-
-        o, _ = o.max(dim=1)
-
-        o = self.linear(o)
-        return o
+        sentence_reps = torch.cat(sentence_reps).unsqueeze(1)
+        o, (h, c) = self.lstm2(sentence_reps)
+        
+        pooled, _ = o.max(dim=0)
+        output = self.linear(pooled)
+        return output
 
     def predict_sentiment(self, x):
-        scores = self.max_pool(x)
+        scores = self.get_document_rep(x)
         probs = F.softmax(scores, dim=1)
         preds = probs.argmax(dim=1)
-        return preds
+        return preds.numpy()
 
-    def pooled_sentiment_loss(self, sents, labels):
-        pred = self.max_pool(sents)
-        loss = self.sentiment_criterion(pred, labels.flatten())
+    def pooled_sentiment_loss(self, doc, label):
+        if type(label) == list:
+            label = torch.tensor(label)
+        pred = self.get_document_rep(doc)
+        loss = self.sentiment_criterion(pred, label)
         return loss
 
     def _forward_alg(self, feats):
         # Do the forward algorithm to compute the partition function
         init_alphas = torch.full((1, self.tagset_size), -10000.)
         # START_TAG has all of the score.
-        init_alphas[0][self.tag_to_ix[self.START_TAG]] = 0.
+        init_alphas[0][self.tag_2_idx[self.START_TAG]] = 0.
 
         # Wrap in a variable so that we will get automatic backprop
         forward_var = init_alphas
@@ -177,14 +166,13 @@ class Hierarchical_Model(nn.Module):
                 # scores.
                 alphas_t.append(self.log_sum_exp(next_tag_var).view(1))
             forward_var = torch.cat(alphas_t).view(1, -1)
-        terminal_var = forward_var + self.transitions[self.tag_to_ix[self.STOP_TAG]]
+        terminal_var = forward_var + self.transitions[self.tag_2_idx[self.STOP_TAG]]
         alpha = self.log_sum_exp(terminal_var)
         return alpha
 
     def _get_lstm_features(self, sentence):
-        self.hidden = self.init_hidden1()
         embeds = self.word_embeds(sentence).view(len(sentence), 1, -1)
-        lstm_out, self.hidden = self.lstm1(embeds, self.hidden)
+        lstm_out, hidden = self.lstm1(embeds)
         lstm_out = lstm_out.view(len(sentence), self.hidden_dim * 2)
         lstm_feats = self.hidden2tag(lstm_out)
         return lstm_feats
@@ -192,11 +180,11 @@ class Hierarchical_Model(nn.Module):
     def _score_sentence(self, feats, tags):
         # Gives the score of a provided tag sequence
         score = torch.zeros(1)
-        tags = torch.cat([torch.tensor([self.tag_to_ix[self.START_TAG]], dtype=torch.long), tags])
+        tags = torch.cat([torch.tensor([self.tag_2_idx[self.START_TAG]], dtype=torch.long), tags])
         for i, feat in enumerate(feats):
             score = score + \
                 self.transitions[tags[i + 1], tags[i]] + feat[tags[i + 1]]
-        score = score + self.transitions[self.tag_to_ix[self.STOP_TAG], tags[-1]]
+        score = score + self.transitions[self.tag_2_idx[self.STOP_TAG], tags[-1]]
         return score
 
     def _viterbi_decode(self, feats):
@@ -204,7 +192,7 @@ class Hierarchical_Model(nn.Module):
 
         # Initialize the viterbi variables in log space
         init_vvars = torch.full((1, self.tagset_size), -10000.)
-        init_vvars[0][self.tag_to_ix[self.START_TAG]] = 0
+        init_vvars[0][self.tag_2_idx[self.START_TAG]] = 0
 
         # forward_var at step i holds the viterbi variables for step i-1
         forward_var = init_vvars
@@ -228,7 +216,7 @@ class Hierarchical_Model(nn.Module):
             backpointers.append(bptrs_t)
 
         # Transition to STOP_TAG
-        terminal_var = forward_var + self.transitions[self.tag_to_ix[self.STOP_TAG]]
+        terminal_var = forward_var + self.transitions[self.tag_2_idx[self.STOP_TAG]]
         best_tag_id = self.argmax(terminal_var)
         path_score = terminal_var[0][best_tag_id]
 
@@ -239,15 +227,27 @@ class Hierarchical_Model(nn.Module):
             best_path.append(best_tag_id)
         # Pop off the start tag (we dont want to return that to the caller)
         start = best_path.pop()
-        assert start == self.tag_to_ix[self.START_TAG]  # Sanity check
+        assert start == self.tag_2_idx[self.START_TAG]  # Sanity check
         best_path.reverse()
         return path_score, best_path
 
     def neg_log_likelihood(self, sentence, tags):
+        sentence = torch.tensor(sentence)
+        tags = torch.tensor(tags)
+        
         feats = self._get_lstm_features(sentence)
         forward_score = self._forward_alg(feats)
         gold_score = self._score_sentence(feats, tags)
         return forward_score - gold_score
+
+    def neg_log_likelihood_document(self, document, tags):
+        loss = 0
+        for sent, tag in zip(document, tags):
+
+            # CLEAN UP THE REGEX
+            if len(sent) == len(tag):
+                loss += self.neg_log_likelihood(sent, tag)
+        return loss / len(document)
 
     def forward(self, sentence):
         # Get the emission scores from the BiLSTM
@@ -269,34 +269,33 @@ class Hierarchical_Model(nn.Module):
         return max_score + \
             torch.log(torch.sum(torch.exp(vec - max_score_broadcast)))
 
-    def eval_aux(self, X, Y, taskname="negation_scope"):
-        idx2label = dict([(i,w) for w,i in self.task2label2id[taskname].items()])
+    def eval_aux(self, X, Y):
+        idx2label = dict([(i,w) for w,i in self.tag_2_idx.items()])
         preds = []
         ys = []
 
         with torch.no_grad():
-            for x, y in zip(X, Y):
-                x = torch.tensor(x)
-                score, pred = self.forward(x)
+            for doc, tags in zip(X, Y):
+                for i, sent in enumerate(doc):
+                    x = torch.tensor(sent)
+                    y = tags[i]
 
+                    score, pred = self.forward(x)
 
-                preds.append([idx2label[i] for i in pred])
-                ys.append([idx2label[i] for i in y[taskname]])
+                    #NEED TO CLEAN UP REGEX TO REMOVE ANNS
+                    if len(pred) == len(y):
+                        preds.append([idx2label[i] for i in pred])
+                        ys.append([idx2label[i] for i in y])
 
         print(bio_classification_report(ys, preds))
 
-    def eval_sent(self, dev, batch_size):
+    def eval_sent(self, docs, ys):
         preds = []
-        ys = []
 
         with torch.no_grad():
-            for sents, targets in DataLoader(dev, batch_size=batch_size,
-                                             collate_fn=dev.collate_fn,
-                                             shuffle=False):
-                pred = self.predict_sentiment(sents)
-                for x, y in zip(pred, targets):
-                    preds.append(int(x))
-                    ys.append(int(y))
+            for doc in docs:
+                pred = self.predict_sentiment(doc)
+                preds.append(pred)
         f1 = f1_score(ys, preds, average="macro")
         acc = accuracy_score(ys, preds)
         print("Sentiment F1: {0:.3f}".format(f1))
@@ -339,45 +338,60 @@ if __name__ == "__main__":
 
     # Import datasets
     # This will update vocab with words not found in embeddings
-    sst = SSTDataset(vocab, False, True)
+    sfu = SFUDataset(vocab, False, "../data")
 
-    maintask_train_iter = sst.get_split("train")
-    maintask_dev_iter = sst.get_split("dev")
-    maintask_test_iter = sst.get_split("test")
+    maintask_train_iter = sfu.get_split("train")
+    maintask_dev_iter = sfu.get_split("dev")
+    maintask_test_iter = sfu.get_split("test")
 
     maintask_loader = DataLoader(maintask_train_iter,
                                  batch_size=args.BATCH_SIZE,
                                  collate_fn=maintask_train_iter.collate_fn,
                                  shuffle=True)
 
-    X, Y, org_X, org_Y, word2id, char2id, task2label2id =\
-         get_conll_data("../data/datasets/en/preprocessed/SFU/filtered_negation_scope.conll",
-                        ["negation_scope"],
-                        word2id=vocab)
+    tag_2_idx = {START_TAG:3, STOP_TAG:4, "B":0, "I":1, "O":2}
+    
+    main_train_x = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_train_iter]
+    main_train_y = [[sfu.labels[pol]] for  doc, pol, rel, scope in maintask_train_iter]
+    aux_train_y = [[[tag_2_idx[w] for w in s] for s in scope] for doc, pol, rel, scope in maintask_train_iter]
 
-    train_n = int(len(X) * .9)
-    tag_to_ix = task2label2id[args.AUXILIARY_TASK]
-    tag_to_ix[START_TAG] = len(tag_to_ix)
-    tag_to_ix[STOP_TAG] = len(tag_to_ix)
+    main_dev_x = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_dev_iter]
+    main_dev_y = [[sfu.labels[pol]] for  doc, pol, rel, scope in maintask_dev_iter]
+    aux_dev_y = [[[tag_2_idx[w] for w in s] for s in scope] for doc, pol, rel, scope in maintask_dev_iter]
 
-    X, char_X = zip(*X)
-
-    auxiliary_trainX = X[:train_n]
-    auxiliary_trainY = Y[:train_n]
-    auxiliary_testX = X[train_n:]
-    auxiliary_testY = Y[train_n:]
+    main_test_x = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_test_iter]
 
     diff = len(vocab) - embeddings.vocab_length - 1
     UNK_embedding = np.zeros((1, 300))
     new_embeddings = np.zeros((diff, args.EMBEDDING_DIM))
     new_matrix = np.concatenate((UNK_embedding, embeddings._matrix, new_embeddings))
 
-    model = Hierarchical_Model(vocab,
-                       new_matrix,
-                       tag_to_ix,
-                       5,
-                       task2label2id,
-                       300,
-                       100,
-                       1,
-                       train_embeddings=False)
+
+    def bow(doc, vocab):
+        bow_rep = np.zeros(len(vocab))
+        for sent in doc:
+            for tok in sent:
+                if tok in vocab:
+                    bow_rep[vocab[tok]] += 1
+        return bow_rep
+
+    train_X = [x for x, _, _, _ in maintask_train_iter]
+    dev_X = [x for x, _, _, _ in maintask_dev_iter]
+    test_X = [x for x, _, _, _ in maintask_test_iter]
+
+    c = Counter()
+    for d in train_X + dev_X + test_X:
+        for  s in d:
+            c.update(s)
+
+    voc = {}
+    for w, i in c.items():
+        voc[w] = len(voc)
+    
+
+    train_y = [i[0] for i in main_train_y]
+    dev_y = [i[0] for i in main_dev_y]
+
+    clf = LinearSVC()
+    clf.fit(train_X, train_y)
+    clf.score(dev_X, dev_y)

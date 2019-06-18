@@ -101,12 +101,15 @@ def proc_neg_structure(neg_structure, sents, file, i):
             sents[file][i]["tokens"].append(token)
 
 
-def read_file(file, sents):
+def read_file(file, sents, train=True):
     #print(file)
     tree = ET.parse(file)
     root = tree.getroot()
 
-    polarity = root.attrib["polarity"]
+    if train:
+        polarity = root.attrib["polarity"]
+    else:
+        polarity = None
 
     sents[file] = {}
     for i, sent in enumerate(root):
@@ -118,31 +121,33 @@ def read_file(file, sents):
             d[elem.tag](elem, sents, file, i)
     return sents, polarity
 
-def read_dir(DIR, sents):
+def read_dir(DIR, sents, train=True):
     polarities = []
     for file in os.listdir(DIR):
-        sents, polarity = read_file(os.path.join(DIR, file), sents)
+        sents, polarity = read_file(os.path.join(DIR, file), sents, train=train)
         polarities.append(polarity)
 
     return sents, polarities
 
-def get_dataset(base_dir):
+def get_dataset(base_dir, train=True):
 
+    filenames = []
     dataset = []
     polarities = []
     for DIR in os.listdir(base_dir):
         if os.path.isdir(os.path.join(base_dir, DIR)):
             sents = {}
-            sents, pol = read_dir(os.path.join(base_dir, DIR), sents)
+            sents, pol = read_dir(os.path.join(base_dir, DIR), sents, train=train)
 
-            for review in sents.values():
+            for name, review in sents.items():
                 review_text = []
                 for sent in review.values():
                     review_text.append(" ".join(sent["tokens"]))
                 dataset.append(review_text)
+                filenames.append(name)
             polarities.extend(pol)
 
-    return dataset, polarities
+    return filenames, dataset, polarities
 
 def scope_bio(sent):
     bio = []
@@ -195,7 +200,7 @@ for o in others:
 
 if __name__ == "__main__":
 
-    dataset, polarities = get_dataset("../../subtaskB_training_and_dev_sets/SFU/train")
+    filenames, dataset, polarities = get_dataset("../../data/train")
     scopes = [[scope_bio(s) for s in review] for review in dataset]
     relev = [[relevant_negation_tags(s) for s in review] for review in dataset]
     sents = [[clean_sent(s) for s in review] for review in dataset]

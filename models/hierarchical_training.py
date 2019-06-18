@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from collections import defaultdict
-from Utils.sst import SSTDataset
+from Utils.datasets import *
 from torch.utils.data import DataLoader
 
 import os
@@ -58,18 +58,18 @@ def train_model(vocab,
                 new_matrix,
                 tag_to_ix,
                 num_labels,
-                task2label2id,
                 embedding_dim,
                 hidden_dim,
                 num_lstm_layers,
                 train_embeddings,
+                maintask_trainX,
+                maintask_trainY,
+                maintask_devX,
+                maintask_devY,
                 auxiliary_trainX,
                 auxiliary_trainY,
-                auxiliary_testX,
-                auxiliary_testY,
-                maintask_loader,
-                maintask_train_iter,
-                maintask_dev_iter,
+                auxiliary_devX,
+                auxiliary_devY,
                 AUXILIARY_TASK=None,
                 epochs=10,
                 sentiment_learning_rate=0.001,
@@ -85,10 +85,10 @@ def train_model(vocab,
                   new_matrix.shape,
                   tag_to_ix,
                   num_labels,
-                  task2label2id)
+                  None)
 
     basedir = os.path.join("saved_models",
-                           "SST-{0}".format(FINE_GRAINED),
+                           "SFU",
                            args.AUXILIARY_TASK)
     outfile = os.path.join(basedir,
                            "params.pkl")
@@ -104,7 +104,6 @@ def train_model(vocab,
                                    new_matrix,
                                    tag_to_ix,
                                    num_labels,
-                                   task2label2id,
                                    embedding_dim,
                                    hidden_dim,
                                    1,
@@ -144,19 +143,19 @@ def train_model(vocab,
 
                     # Step 2. Get our inputs ready for the network, that is,
                     # turn them into Tensors of word indices.
-                    sentence_in = torch.tensor(auxiliary_trainX[k])
-                    targets = torch.tensor(auxiliary_trainY[k][AUXILIARY_TASK])
+                    document = auxiliary_trainX[k]
+                    targets = auxiliary_trainY[k]
 
                     # Step 3. Run our forward pass.
-                    loss = model.neg_log_likelihood(sentence_in, targets)
+                    loss = model.neg_log_likelihood_document(document, targets)
 
                     # Step 4. Compute the loss, gradients, and update the parameters by
                     # calling optimizer.step()
                     loss.backward()
                     auxiliary_optimizer.step()
 
-                model.eval_aux(auxiliary_testX, auxiliary_testY,
-                               taskname=AUXILIARY_TASK)
+                #model.eval_aux(auxiliary_testX, auxiliary_testY,
+                #               taskname=AUXILIARY_TASK)
 
             batch_losses = 0
             num_batches = 0
@@ -164,10 +163,13 @@ def train_model(vocab,
 
             print("epoch {0}".format(epoch + 1))
 
-            for sents, targets in maintask_loader:
+            for k in tqdm(range(len(maintask_trainX))):
                 model.zero_grad()
 
-                loss = model.pooled_sentiment_loss(sents, targets)
+                doc = maintask_trainX[k]
+                target = maintask_trainY[k]
+
+                loss = model.pooled_sentiment_loss(doc, target)
                 batch_losses += loss.data
                 num_batches += 1
 
@@ -177,17 +179,16 @@ def train_model(vocab,
             print()
             print("loss: {0:.3f}".format(batch_losses / num_batches))
             model.eval()
-            f1, acc, preds, ys = model.eval_sent(maintask_train_iter,
-                                                 batch_size=BATCH_SIZE)
-            f1, acc, preds, ys = model.eval_sent(maintask_dev_iter,
-                                                 batch_size=BATCH_SIZE)
+            f1, acc, preds, ys = model.eval_sent(maintask_trainX, maintask_trainY)
+            f1, acc, preds, ys = model.eval_sent(maintask_devX, maintask_devY)
+
 
             if acc > best_dev_acc:
                 best_dev_acc = acc
                 print("NEW BEST DEV ACC: {0:.3f}".format(acc))
 
 
-                basedir = os.path.join("saved_models", "SST-{0}".format(FINE_GRAINED),
+                basedir = os.path.join("saved_models", "SFU",
                                        AUXILIARY_TASK,
                                        "{0}".format(run + 1))
                 outname = "epochs:{0}-lstm_dim:{1}-lstm_layers:{2}-devacc:{3:.3f}".format(epoch + 1, model.lstm1.hidden_size, model.lstm1.num_layers, acc)
@@ -210,7 +211,7 @@ if __name__ == "__main__":
     parser.add_argument("--TRAIN_EMBEDDINGS", "-te", action="store_false")
     parser.add_argument("--AUXILIARY_TASK", "-aux", default="negation_scope")
     parser.add_argument("--EMBEDDINGS", "-emb",
-                        default="../../embeddings/google.txt")
+                        default="../../embeddings/neges.txt")
     parser.add_argument("--SENTIMENT_LR", "-slr", default=0.001, type=float)
     parser.add_argument("--AUXILIARY_LR", "-alr", default=0.0001, type=float)
     parser.add_argument("--FINE_GRAINED", "-fg",
@@ -241,89 +242,50 @@ if __name__ == "__main__":
 
     # Import datasets
     # This will update vocab with words not found in embeddings
-    datadir = "../data/datasets/en/sst-{0}".format(args.FINE_GRAINED)
-    sst = SSTDataset(vocab, False, datadir)
+    sfu = SFUDataset(vocab, False, "../data")
 
-    maintask_train_iter = sst.get_split("train")
-    maintask_dev_iter = sst.get_split("dev")
-    maintask_test_iter = sst.get_split("test")
-
-    maintask_loader = DataLoader(maintask_train_iter,
-                                 batch_size=args.BATCH_SIZE,
-                                 collate_fn=maintask_train_iter.collate_fn,
-                                 shuffle=True)
-
-    if args.AUXILIARY_TASK in ["speculation_scope"]:
-        X, Y, org_X, org_Y, word2id, char2id, task2label2id =\
-         get_conll_data("../data/datasets/en/preprocessed/SFU/filtered_speculation_scope.conll",
-                        ["speculation_scope"],
-                        word2id=vocab)
+    maintask_train_iter = sfu.get_split("train")
+    maintask_dev_iter = sfu.get_split("dev")
 
 
-    if args.AUXILIARY_TASK in ["negation_scope"]:
-        X, Y, org_X, org_Y, word2id, char2id, task2label2id =\
-         get_conll_data("../data/datasets/en/preprocessed/SFU/filtered_negation_scope.conll",
-                        ["negation_scope"],
-                        word2id=vocab)
+    # Set all relevant auxiliary task parameters to None
+    tag_2_idx = {"B": 0, "I": 1, "O": 2}
+    tag_2_idx[START_TAG] = len(tag_2_idx)
+    tag_2_idx[STOP_TAG] = len(tag_2_idx)
 
+    maintask_trainX = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_train_iter]
+    maintask_trainY = [[sfu.labels[pol]] for  doc, pol, rel, scope in maintask_train_iter]
+    auxiliary_trainY = [[[tag_2_idx[w] for w in s] for s in scope] for doc, pol, rel, scope in maintask_train_iter]
 
-    if args.AUXILIARY_TASK in ["xpos", "upos", "multiword", "supersense"]:
-        X, Y, org_X, org_Y, word2id, char2id, task2label2id =\
-        get_conll_data("../data/datasets/en/preprocessed/streusle/dev/streusle.ud_dev.conllulex",
-                       ["xpos", "upos", "multiword", "supersense"],
-                       word2id=vocab)
-
-
-    if args.AUXILIARY_TASK not in ["None", "none", 0, None]:
-        train_n = int(len(X) * .9)
-        tag_to_ix = task2label2id[args.AUXILIARY_TASK]
-        tag_to_ix[START_TAG] = len(tag_to_ix)
-        tag_to_ix[STOP_TAG] = len(tag_to_ix)
-
-        X, char_X = zip(*X)
-
-        auxiliary_trainX = X[:train_n]
-        auxiliary_trainY = Y[:train_n]
-        auxiliary_testX = X[train_n:]
-        auxiliary_testY = Y[train_n:]
-
-    else:
-        # Set all relevant auxiliary task parameters to None
-        tag_to_ix = {"None": 0}
-        tag_to_ix[START_TAG] = len(tag_to_ix)
-        tag_to_ix[STOP_TAG] = len(tag_to_ix)
-        task2label2id = None
-
-        auxiliary_trainX = None
-        auxiliary_trainY = None
-        auxiliary_testX = None
-        auxiliary_testY = None
-
+    maintask_devX = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_dev_iter]
+    maintask_devY = [[sfu.labels[pol]] for  doc, pol, rel, scope in maintask_dev_iter]
+    auxiliary_devY = [[[tag_2_idx[w] for w in s] for s in scope] for doc, pol, rel, scope in maintask_dev_iter]
 
     # Get new embedding matrix so that words not included in pretrained embeddings have a random embedding
 
-    diff = len(vocab) - embeddings.vocab_length - 1
+    #diff = len(vocab) - embeddings.vocab_length
+    #print(diff)
     UNK_embedding = np.zeros((1, 300))
-    new_embeddings = np.zeros((diff, args.EMBEDDING_DIM))
-    new_matrix = np.concatenate((UNK_embedding, embeddings._matrix, new_embeddings))
+    #new_embeddings = np.zeros((diff, args.EMBEDDING_DIM))
+    new_matrix = np.concatenate((UNK_embedding, embeddings._matrix))
 
 
     train_model(vocab,
                 new_matrix,
-                tag_to_ix,
-                len(sst.labels),
-                task2label2id,
+                tag_2_idx,
+                len(sfu.labels),
                 args.EMBEDDING_DIM,
                 args.HIDDEN_DIM,
                 args.NUM_LAYERS,
                 args.TRAIN_EMBEDDINGS,
-                auxiliary_trainX,
+                maintask_trainX,
+                maintask_trainY,
+                maintask_devX,
+                maintask_devY,
+                maintask_trainX,
                 auxiliary_trainY,
-                auxiliary_testX,
-                auxiliary_testY,
-                maintask_loader,
-                maintask_train_iter,
-                maintask_dev_iter,
+                maintask_devX,
+                auxiliary_devY,
                 AUXILIARY_TASK=args.AUXILIARY_TASK,
                 epochs=10,
                 sentiment_learning_rate=args.SENTIMENT_LR,
@@ -333,4 +295,3 @@ if __name__ == "__main__":
                 random_seeds=[123, 456, 789, 101112, 131415],
                 FINE_GRAINED=args.FINE_GRAINED
                 )
-

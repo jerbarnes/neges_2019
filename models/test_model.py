@@ -1,10 +1,9 @@
 import argparse
 import pickle
 
-from hard_parameter_bilstm_crf import *
-from bilstm_crf import *
+from hierarchical_training import *
 from hierarchical_model import *
-from Utils.sst import *
+from Utils.datasets import *
 
 def get_best_run(weightdir):
     """
@@ -27,7 +26,27 @@ def get_best_run(weightdir):
     return best_acc, best_params, best_weights
 
 def test_model(aux_task, num_runs=5, metric="acc", FINE_GRAINED="fine"):
+    pass
 
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--AUXILIARY_TASK", "-aux", default="negation_scope")
+    parser.add_argument("--NUM_RUNS", "-nr", default=5, type=int)
+    parser.add_argument("--METRIC", "-m", default="acc")
+    parser.add_argument("--FINE_GRAINED", "-fg",
+                        default="fine",
+                        help="Either 'fine' or 'binary' (defaults to 'fine'.")
+    args = parser.parse_args()
+
+    # f1s, accs, preds, ys = test_model(args.AUXILIARY_TASK,
+    #                                   num_runs=args.NUM_RUNS,
+    #                                   metric=args.METRIC,
+    #                                   FINE_GRAINED=args.FINE_GRAINED)
+
+    aux_task = args.AUXILIARY_TASK
+    num_runs = args.NUM_RUNS
+    metric = args.METRIC
 
     f1s = []
     accs = []
@@ -35,8 +54,8 @@ def test_model(aux_task, num_runs=5, metric="acc", FINE_GRAINED="fine"):
     ys = []
 
     print("opening model params...")
-    with open(os.path.join("saved_models",
-                           "SST-{0}".format(FINE_GRAINED),
+    with open(os.path.join("saved_models_random_embs",
+                           "SFU",
                            aux_task,
                            "params.pkl"), "rb") as infile:
         params = pickle.load(infile)
@@ -50,22 +69,26 @@ def test_model(aux_task, num_runs=5, metric="acc", FINE_GRAINED="fine"):
     vocab = Vocab(train=False)
     vocab.update(w2idx)
 
-    datadir = "../data/datasets/en/sst-{0}".format(args.FINE_GRAINED)
-    sst = SSTDataset(vocab, False, datadir)
-    maintask_test_iter = sst.get_split("test")
+    sfu = SFUDataset(vocab, False, "../data")
+    maintask_dev_iter = sfu.get_split("dev")
+    maintask_devX = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_dev_iter]
+    maintask_devY = [[sfu.labels[pol]] for  doc, pol, rel, scope in maintask_dev_iter]
 
-    chfile = "../data/challenge_dataset/sst-{0}.txt".format(args.FINE_GRAINED)
-    challenge_dataset = ChallengeDataset(vocab, False, chfile)
-    challenge_test = challenge_dataset.get_split()
+    maintask_test_iter = sfu.get_split("test")
+
+    maintask_testX = [[vocab.ws2ids(s) for s in doc] for doc, pol, scope, rel in maintask_test_iter]
+
 
     new_matrix = np.zeros(matrix_shape)
+
+    idx_2_label = {0: "negative", 1: "positive"}
 
 
     print("finding best weights for runs 1 - {0}".format(num_runs))
     for i in range(num_runs):
         run = i + 1
-        weight_dir = os.path.join("saved_models",
-                                  "SST-{0}".format(FINE_GRAINED),
+        weight_dir = os.path.join("saved_models_random_embs",
+                                  "SFU",
                                   aux_task,
                                   str(run))
         best_acc, (epochs, lstm_dim, lstm_layers), best_weights =\
@@ -74,67 +97,49 @@ def test_model(aux_task, num_runs=5, metric="acc", FINE_GRAINED="fine"):
         model = Hierarchical_Model(vocab,
                                    new_matrix,
                                    tag_to_ix,
-                                   len_labels,
-                                   task2label2id,
+                                   2,
                                    300,
                                    lstm_dim,
                                    1,
-                                   train_embeddings=True)
+                                   train_embeddings=False)
 
 
 
         model.load_state_dict(torch.load(best_weights))
         model.eval()
 
-        print("Run {0}".format(run))
-        f1, acc, pred, y = model.eval_sent(maintask_test_iter, batch_size=50)
-        print()
+        # DEV ACC
+        print("DEV")
+        f1, acc, preds, ys = model.eval_sent(maintask_devX, maintask_devY)
 
-        f1s.append(f1)
-        accs.append(acc)
-        preds.append(pred)
-        ys.append(y)
+        # print("Run {0}".format(run))
+        # pred = []
+        # for k in tqdm(range(len(maintask_testX))):
+        #     p = model.predict_sentiment(maintask_testX[k])
+        #     p = idx_2_label[int(p)]
+        #     fullname = sfu.splits_names["test"][k]
+        #     splt = fullname.split("/")
+        #     filename = splt[-1].split(".")[0]
+        #     domain = splt[-2]
+        #     pred.append((filename, domain, p))
+        # print()
 
-        print("Eval on challenge data")
-        chf1, chacc, chpred, chy = model.eval_sent(challenge_test, batch_size=1)
-        print()
+        # # print challenge predictions to check
+        # prediction_dir = os.path.join("predictions", "SFU", aux_task)
+        # os.makedirs(prediction_dir, exist_ok=True)
+        # with open(os.path.join(prediction_dir, "run{0}_pred.txt".format(run)), "w") as out:
+        #     for filename, domain, p in pred:
+        #         out.write("{0}\t{1}\t{2}\n".format(filename, domain, p))
 
-        # print challenge predictions to check
-        prediction_dir = os.path.join("predictions", "SST-{0}".format(FINE_GRAINED), aux_task)
+        prediction_dir = os.path.join("predictions", "SFU", aux_task)
         os.makedirs(prediction_dir, exist_ok=True)
-        with open(os.path.join(prediction_dir, "run{0}_challenge_pred.txt".format(run)), "w") as out:
-            for line in chpred:
-                out.write("{0}\n".format(line))
-    mean_f1 = np.mean(f1s)
-    std_f1 = np.std(f1s)
+        with open(os.path.join(prediction_dir, "run{0}_pred.txt".format(run)), "w") as out:
+            for p in preds:
+                out.write("{0}\n".format(p[0]))
 
-    mean_acc = np.mean(accs)
-    std_acc = np.std(accs)
-
-    print("#"*20 + "FINAL" + "#"*20)
-
-    if metric == "f1":
-        print("MEAN F1: {0:.3f}".format(mean_f1))
-        print("STD F1: {0:.3f}".format(std_f1))
-
-    if metric == "acc":
-        print("MEAN ACC: {0:.2f} ({1:.1f})".format(mean_acc * 100, std_acc * 100))
-    return f1s, accs, preds, ys
+        with open(os.path.join(prediction_dir, "gold.txt"), "w") as out:
+            for line in maintask_devY:
+                out.write("{0}\n".format(line[0]))
 
 
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--AUXILIARY_TASK", "-aux", default="negation_scope")
-    parser.add_argument("--NUM_RUNS", "-nr", default=5, type=int)
-    parser.add_argument("--METRIC", "-m", default="acc")
-    parser.add_argument("--FINE_GRAINED", "-fg",
-                        default="fine",
-                        help="Either 'fine' or 'binary' (defaults to 'fine'.")
-    args = parser.parse_args()
-
-    f1s, accs, preds, ys = test_model(args.AUXILIARY_TASK,
-                                      num_runs=args.NUM_RUNS,
-                                      metric=args.METRIC,
-                                      FINE_GRAINED=args.FINE_GRAINED)
 
